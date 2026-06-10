@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const TRANSFER_LIST_URL = 'https://n0qaa2fx3c.execute-api.us-east-1.amazonaws.com/default/transferList';
+const TRANSFER_LIST_URL = process.env.REACT_APP_TRANSFER_LIST_URL;
 
 export async function getTransferList() {
   const { data } = await axiosClient.get(TRANSFER_LIST_URL);
