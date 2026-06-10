@@ -8,6 +8,16 @@
 
 **Tech Stack:** React 19, React Router v6, Zustand, TanStack Query v5, Axios, Jest + RTL, better-sqlite3, bcryptjs
 
+**UI Framework:** Material UI (MUI) v5 — **OBLIGATORIO usar componentes MUI en toda la UI:**
+- Inputs → `TextField` de `@mui/material` (el componente `Input` wrappea TextField)
+- Buttons → `Button` de `@mui/material` (el componente `Button` wrappea MuiButton)
+- Loaders → `CircularProgress` (o el componente `Loader` existente que usa `role="status"`)
+- Alertas/errores → `Alert` de `@mui/material`
+- Layout → `Box`, `Stack`, `Paper`, `AppBar`, `Toolbar`, `Typography`, `Container`
+- Estilos → prop `sx`, NO `style` con CSS vars inline
+- Iconos → `react-icons/fi` (Feather Icons), **NUNCA emojis**
+- Responsive → usar `Container maxWidth="sm"` para mobile-first; breakpoints MUI (`xs`, `sm`, `md`) para grids y layouts que deben verse bien en mobile Y escritorio
+
 ---
 
 ## Mapa de archivos
@@ -68,7 +78,7 @@ src/
 
 ---
 
-## Task 1: Instalar dependencias y estructura base
+## ~~Task 1: Instalar dependencias y estructura base~~ ✅ COMPLETADO
 
 **Files:**
 - Modify: `package.json`
@@ -176,7 +186,7 @@ git commit -m "feat: setup dependencias, estructura de directorios y design toke
 
 ---
 
-## Task 2: Axios Singleton (`axiosClient.js`)
+## ~~Task 2: Axios Singleton (`axiosClient.js`)~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/api/axiosClient.js`
@@ -229,7 +239,7 @@ git commit -m "feat: implementar axiosClient Singleton con interceptores de auth
 
 ---
 
-## Task 3: Zustand stores
+## ~~Task 3: Zustand stores~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/store/authStore.js`
@@ -321,7 +331,7 @@ git commit -m "feat: implementar authStore y uiStore con Zustand"
 
 ---
 
-## Task 4: Componentes UI base
+## ~~Task 4: Componentes UI base~~ ✅ COMPLETADO (con MUI)
 
 **Files:**
 - Create: `src/components/ui/Button.jsx`
@@ -636,7 +646,7 @@ git commit -m "feat: implementar componentes UI base: Button, Input, Loader, Err
 
 ---
 
-## Task 5: Utilidades — validators y formatters
+## ~~Task 5: Utilidades — validators y formatters~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/utils/validators.js`
@@ -797,7 +807,7 @@ git commit -m "feat: implementar validators y formatters con tests"
 
 ---
 
-## Task 6: Capa de API
+## ~~Task 6: Capa de API~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/api/auth.api.js`
@@ -871,7 +881,7 @@ git commit -m "feat: implementar capa de API con 4 endpoints (auth, balance, tra
 
 ---
 
-## Task 7: TanStack Query hooks
+## ~~Task 7: TanStack Query hooks~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/hooks/useLoginMutation.js`
@@ -995,7 +1005,7 @@ git commit -m "feat: implementar hooks de TanStack Query (login, balance, transf
 
 ---
 
-## Task 8: AuthGuard y AppRouter
+## ~~Task 8: AuthGuard y AppRouter~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/components/auth/AuthGuard.jsx`
@@ -1145,7 +1155,7 @@ git commit -m "feat: implementar AuthGuard y AppRouter con rutas protegidas"
 
 ---
 
-## Task 9: LoginPage
+## ~~Task 9: LoginPage~~ ✅ COMPLETADO (con MUI)
 
 **Files:**
 - Create: `src/pages/LoginPage/hooks/useLoginPage.js`
@@ -1431,53 +1441,50 @@ Esperado: `FAIL`
 - [ ] **Step 3: Crear `src/components/balance/BalanceCard.jsx`**
 
 ```jsx
+import { Box, Typography, Chip } from '@mui/material';
 import Loader from '../ui/Loader';
 import { formatCurrency } from '../../utils/formatters';
 
-const cardStyle = {
-  background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%)',
-  borderRadius: 'var(--radius-lg)',
-  padding: 'var(--space-8) var(--space-6)',
-  color: 'var(--color-text-inverse)',
-  boxShadow: 'var(--shadow-card)',
-  marginBottom: 'var(--space-6)',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 'var(--space-4)',
-};
-
 export default function BalanceCard({ saldo, moneda, loading }) {
   return (
-    <div style={cardStyle}>
-      <span style={{ fontSize: '14px', opacity: 0.85 }}>Tu saldo disponible</span>
+    <Box
+      sx={{
+        background: 'linear-gradient(135deg, #0A2463 0%, #1E88E5 100%)',
+        borderRadius: 3,
+        p: 4,
+        color: 'white',
+        boxShadow: 2,
+        mb: 3,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+      }}
+    >
+      <Typography variant="body2" sx={{ opacity: 0.85 }}>
+        Tu saldo disponible
+      </Typography>
       {loading ? (
         <Loader size="md" />
       ) : (
         <>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '32px',
-              fontWeight: 600,
-              letterSpacing: '-1px',
-            }}
+          <Typography
+            variant="h4"
+            sx={{ fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: '-1px' }}
           >
             {formatCurrency(saldo, moneda)}
-          </span>
-          <span
-            style={{
-              fontSize: '13px',
+          </Typography>
+          <Chip
+            label={moneda}
+            size="small"
+            sx={{
               background: 'rgba(255,255,255,0.2)',
-              borderRadius: 'var(--radius-sm)',
-              padding: '2px 8px',
+              color: 'white',
               alignSelf: 'flex-start',
             }}
-          >
-            {moneda}
-          </span>
+          />
         </>
       )}
-    </div>
+    </Box>
   );
 }
 ```
@@ -1513,69 +1520,53 @@ export function useDashboardPage() {
 - [ ] **Step 5: Crear `src/pages/DashboardPage/DashboardPage.jsx`** (reemplaza stub)
 
 ```jsx
+import { Box, AppBar, Toolbar, Typography, Button as MuiButton, Stack, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDashboardPage } from './hooks/useDashboardPage';
 import BalanceCard from '../../components/balance/BalanceCard';
 import Button from '../../components/ui/Button';
-import ErrorMessage from '../../components/ui/ErrorMessage';
-
-const navStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: 'var(--space-4) var(--space-6)',
-  background: 'var(--color-primary)',
-  color: 'var(--color-text-inverse)',
-};
-
-const mainStyle = {
-  padding: 'var(--space-6)',
-  maxWidth: '480px',
-  margin: '0 auto',
-};
 
 export default function DashboardPage() {
   const navigate = useNavigate();
   const { user, saldo, moneda, isLoading, isError, handleLogout } = useDashboardPage();
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-surface)' }}>
-      <nav style={navStyle}>
-        <span style={{ fontFamily: 'var(--font-headline)', fontWeight: 700 }}>BancoXYZ</span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
-          {user && (
-            <span style={{ fontSize: '14px', opacity: 0.85 }}>Hola, {user.name}</span>
-          )}
-          <button
-            onClick={handleLogout}
-            style={{
-              background: 'none',
-              border: '1px solid rgba(255,255,255,0.4)',
-              color: 'var(--color-text-inverse)',
-              borderRadius: 'var(--radius-md)',
-              padding: '6px 12px',
-              fontSize: '13px',
-              cursor: 'pointer',
-            }}
-          >
-            Salir
-          </button>
-        </div>
-      </nav>
-      <main style={mainStyle}>
-        <ErrorMessage
-          message="No se pudo cargar el saldo. Intenta de nuevo."
-          visible={isError}
-        />
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+      <AppBar position="static">
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Typography variant="h6" fontWeight={700}>BancoXYZ</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            {user && (
+              <Typography variant="body2" sx={{ opacity: 0.85 }}>
+                Hola, {user.name}
+              </Typography>
+            )}
+            <MuiButton
+              variant="outlined"
+              size="small"
+              onClick={handleLogout}
+              sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.4)' }}
+            >
+              Salir
+            </MuiButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ p: 3, maxWidth: 480, mx: 'auto' }}>
+        {isError && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            No se pudo cargar el saldo. Intenta de nuevo.
+          </Alert>
+        )}
         <BalanceCard saldo={saldo} moneda={moneda} loading={isLoading} />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+        <Stack spacing={1.5}>
           <Button onClick={() => navigate('/transfer')}>Realizar transferencia</Button>
           <Button variant="secondary" onClick={() => navigate('/transfers')}>
             Ver transferencias
           </Button>
-        </div>
-      </main>
-    </div>
+        </Stack>
+      </Box>
+    </Box>
   );
 }
 ```
@@ -1745,31 +1736,21 @@ export function useTransferPage() {
 - [ ] **Step 4: Crear `src/components/transfer/TransferForm.jsx`**
 
 ```jsx
+import { Box, Alert, TextField, MenuItem } from '@mui/material';
+import { FiClock } from 'react-icons/fi';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
-import ErrorMessage from '../ui/ErrorMessage';
 
 const CURRENCIES = ['COP', 'USD', 'EUR'];
 
-const selectStyle = {
-  width: '100%',
-  padding: '12px 16px',
-  border: '1.5px solid var(--color-border)',
-  borderRadius: 'var(--radius-md)',
-  fontSize: '16px',
-  fontFamily: 'var(--font-body)',
-  color: 'var(--color-text-primary)',
-  background: 'var(--color-surface-card)',
-  marginBottom: 'var(--space-4)',
-};
-
 export default function TransferForm({ form, errors, onChange, onSubmit, loading, isError, isScheduled }) {
   return (
-    <form onSubmit={onSubmit} noValidate>
-      <ErrorMessage
-        message="Error al realizar la transferencia. Intenta de nuevo."
-        visible={isError}
-      />
+    <Box component="form" onSubmit={onSubmit} noValidate>
+      {isError && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          Error al realizar la transferencia. Intenta de nuevo.
+        </Alert>
+      )}
       <Input
         label="Monto"
         name="valor"
@@ -1780,17 +1761,19 @@ export default function TransferForm({ form, errors, onChange, onSubmit, loading
         placeholder="0"
         required
       />
-      <div style={{ marginBottom: 'var(--space-4)' }}>
-        <label
-          htmlFor="moneda"
-          style={{ display: 'block', marginBottom: 'var(--space-2)', fontSize: '14px', fontWeight: 500, color: 'var(--color-text-muted)' }}
-        >
-          Moneda
-        </label>
-        <select id="moneda" name="moneda" value={form.moneda} onChange={onChange} style={selectStyle}>
-          {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </div>
+      <TextField
+        select
+        fullWidth
+        label="Moneda"
+        name="moneda"
+        value={form.moneda}
+        onChange={onChange}
+        sx={{ mb: 2 }}
+      >
+        {CURRENCIES.map((c) => (
+          <MenuItem key={c} value={c}>{c}</MenuItem>
+        ))}
+      </TextField>
       <Input
         label="Documento del destinatario"
         name="documento_pagador"
@@ -1811,24 +1794,14 @@ export default function TransferForm({ form, errors, onChange, onSubmit, loading
         required
       />
       {isScheduled && (
-        <div
-          style={{
-            padding: 'var(--space-3) var(--space-4)',
-            background: '#FFF8E1',
-            border: '1px solid var(--color-warning)',
-            borderRadius: 'var(--radius-md)',
-            fontSize: '14px',
-            color: 'var(--color-warning)',
-            marginBottom: 'var(--space-4)',
-          }}
-        >
-          ⏰ Transferencia programada para el {form.fecha_transferencia}
-        </div>
+        <Alert severity="warning" icon={<FiClock />} sx={{ mb: 2 }}>
+          Transferencia programada para el {form.fecha_transferencia}
+        </Alert>
       )}
       <Button type="submit" loading={loading}>
         Transferir
       </Button>
-    </form>
+    </Box>
   );
 }
 ```
@@ -1836,31 +1809,11 @@ export default function TransferForm({ form, errors, onChange, onSubmit, loading
 - [ ] **Step 5: Crear `src/pages/TransferPage/TransferPage.jsx`** (reemplaza stub)
 
 ```jsx
+import { Box, AppBar, Toolbar, IconButton, Typography, Paper } from '@mui/material';
+import { FiArrowLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useTransferPage } from './hooks/useTransferPage';
 import TransferForm from '../../components/transfer/TransferForm';
-
-const navStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 'var(--space-4)',
-  padding: 'var(--space-4) var(--space-6)',
-  background: 'var(--color-primary)',
-  color: 'var(--color-text-inverse)',
-};
-
-const mainStyle = {
-  padding: 'var(--space-6)',
-  maxWidth: '480px',
-  margin: '0 auto',
-};
-
-const cardStyle = {
-  background: 'var(--color-surface-card)',
-  borderRadius: 'var(--radius-lg)',
-  padding: 'var(--space-6)',
-  boxShadow: 'var(--shadow-card)',
-};
 
 export default function TransferPage() {
   const navigate = useNavigate();
@@ -1868,20 +1821,19 @@ export default function TransferPage() {
     useTransferPage();
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-surface)' }}>
-      <nav style={navStyle}>
-        <button
-          onClick={() => navigate('/dashboard')}
-          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: '20px' }}
-        >
-          ←
-        </button>
-        <span style={{ fontFamily: 'var(--font-headline)', fontWeight: 600 }}>
-          Nueva transferencia
-        </span>
-      </nav>
-      <main style={mainStyle}>
-        <div style={cardStyle}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton color="inherit" onClick={() => navigate('/dashboard')} edge="start">
+            <FiArrowLeft />
+          </IconButton>
+          <Typography variant="h6" fontWeight={600} sx={{ ml: 1 }}>
+            Nueva transferencia
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ p: 3, maxWidth: 480, mx: 'auto' }}>
+        <Paper sx={{ p: 3 }}>
           <TransferForm
             form={form}
             errors={errors}
@@ -1891,9 +1843,9 @@ export default function TransferPage() {
             isError={isError}
             isScheduled={isScheduled}
           />
-        </div>
-      </main>
-    </div>
+        </Paper>
+      </Box>
+    </Box>
   );
 }
 ```
@@ -1986,16 +1938,7 @@ Esperado: `FAIL`
 
 ```jsx
 import { useState } from 'react';
-
-const inputStyle = {
-  padding: '10px 14px',
-  border: '1.5px solid var(--color-border)',
-  borderRadius: 'var(--radius-md)',
-  fontSize: '15px',
-  fontFamily: 'var(--font-body)',
-  width: '100%',
-  background: 'var(--color-surface-card)',
-};
+import { Paper, Stack, TextField, Grid } from '@mui/material';
 
 export default function FiltersBar({ onFilter }) {
   const [filters, setFilters] = useState({ nombre: '', montoMin: '', montoMax: '', desde: '', hasta: '' });
@@ -2007,60 +1950,32 @@ export default function FiltersBar({ onFilter }) {
   }
 
   return (
-    <div
-      style={{
-        background: 'var(--color-surface-card)',
-        borderRadius: 'var(--radius-lg)',
-        padding: 'var(--space-4)',
-        marginBottom: 'var(--space-4)',
-        boxShadow: 'var(--shadow-card)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'var(--space-3)',
-      }}
-    >
-      <input
-        name="nombre"
-        placeholder="Filtrar por nombre"
-        value={filters.nombre}
-        onChange={handleChange}
-        style={inputStyle}
-      />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
-        <input
-          name="montoMin"
-          type="number"
-          placeholder="Monto mín"
-          value={filters.montoMin}
+    <Paper sx={{ p: 2, mb: 2 }}>
+      <Stack spacing={1.5}>
+        <TextField
+          name="nombre"
+          placeholder="Filtrar por nombre"
+          value={filters.nombre}
           onChange={handleChange}
-          style={inputStyle}
+          size="small"
+          fullWidth
         />
-        <input
-          name="montoMax"
-          type="number"
-          placeholder="Monto máx"
-          value={filters.montoMax}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-        <input
-          name="desde"
-          type="date"
-          placeholder="Desde"
-          value={filters.desde}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-        <input
-          name="hasta"
-          type="date"
-          placeholder="Hasta"
-          value={filters.hasta}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-      </div>
-    </div>
+        <Grid container spacing={1.5}>
+          <Grid item xs={6}>
+            <TextField name="montoMin" type="number" placeholder="Monto mín" value={filters.montoMin} onChange={handleChange} size="small" fullWidth />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField name="montoMax" type="number" placeholder="Monto máx" value={filters.montoMax} onChange={handleChange} size="small" fullWidth />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField name="desde" type="date" value={filters.desde} onChange={handleChange} size="small" fullWidth InputLabelProps={{ shrink: true }} label="Desde" />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField name="hasta" type="date" value={filters.hasta} onChange={handleChange} size="small" fullWidth InputLabelProps={{ shrink: true }} label="Hasta" />
+          </Grid>
+        </Grid>
+      </Stack>
+    </Paper>
   );
 }
 ```
@@ -2068,8 +1983,8 @@ export default function FiltersBar({ onFilter }) {
 - [ ] **Step 4: Crear `src/components/transfers/TransferList.jsx`**
 
 ```jsx
+import { Box, Paper, Typography, Divider, CircularProgress } from '@mui/material';
 import { formatCurrency, formatDate } from '../../utils/formatters';
-import Loader from '../ui/Loader';
 
 function groupByDate(transfers) {
   return transfers.reduce((groups, t) => {
@@ -2083,24 +1998,17 @@ function groupByDate(transfers) {
 export default function TransferList({ transfers, loading }) {
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', padding: 'var(--space-8)' }}>
-        <Loader size="md" />
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
+        <CircularProgress />
+      </Box>
     );
   }
 
   if (!transfers || transfers.length === 0) {
     return (
-      <div
-        style={{
-          textAlign: 'center',
-          padding: 'var(--space-8)',
-          color: 'var(--color-text-muted)',
-          fontSize: '15px',
-        }}
-      >
+      <Typography align="center" color="text.secondary" sx={{ py: 6 }}>
         Sin resultados
-      </div>
+      </Typography>
     );
   }
 
@@ -2108,66 +2016,49 @@ export default function TransferList({ transfers, loading }) {
   const sortedDates = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
 
   return (
-    <div
-      style={{
-        background: 'var(--color-surface-card)',
-        borderRadius: 'var(--radius-lg)',
-        boxShadow: 'var(--shadow-card)',
-        overflow: 'hidden',
-      }}
-    >
-      <h3 style={{ padding: 'var(--space-4) var(--space-6)', fontFamily: 'var(--font-headline)', fontWeight: 600, borderBottom: '1px solid var(--color-border)' }}>
+    <Paper sx={{ overflow: 'hidden' }}>
+      <Typography variant="h6" fontWeight={600} sx={{ px: 3, py: 2, borderBottom: 1, borderColor: 'divider' }}>
         Movimientos
-      </h3>
+      </Typography>
       {sortedDates.map((date) => (
-        <div key={date}>
-          <div
-            style={{
-              padding: 'var(--space-2) var(--space-6)',
-              fontSize: '13px',
+        <Box key={date}>
+          <Typography
+            variant="caption"
+            sx={{
+              display: 'block',
+              px: 3,
+              py: 1,
               fontWeight: 600,
-              color: 'var(--color-text-muted)',
-              background: 'var(--color-surface)',
+              bgcolor: 'grey.50',
               textTransform: 'uppercase',
-              letterSpacing: '0.5px',
+              letterSpacing: 0.5,
+              color: 'text.secondary',
             }}
           >
             {formatDate(date)}
-          </div>
+          </Typography>
           {grouped[date].map((t, i) => (
-            <div
-              key={i}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: 'var(--space-4) var(--space-6)',
-                borderBottom: '1px solid var(--color-border)',
-              }}
-            >
-              <div>
-                <div style={{ fontWeight: 500, fontSize: '15px' }}>{t.beneficiario.nombre}</div>
-                <div style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>
-                  Doc: {t.beneficiario.documento}
-                </div>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontWeight: 600,
-                    color: 'var(--color-error)',
-                  }}
-                >
-                  -{formatCurrency(t.valor, t.moneda)}
-                </div>
-                <div style={{ fontSize: '13px', color: 'var(--color-text-muted)' }}>{t.moneda}</div>
-              </div>
-            </div>
+            <Box key={i}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 3, py: 2 }}>
+                <Box>
+                  <Typography fontWeight={500}>{t.beneficiario.nombre}</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    Doc: {t.beneficiario.documento}
+                  </Typography>
+                </Box>
+                <Box sx={{ textAlign: 'right' }}>
+                  <Typography fontWeight={600} color="error" sx={{ fontFamily: 'var(--font-mono)' }}>
+                    -{formatCurrency(t.valor, t.moneda)}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">{t.moneda}</Typography>
+                </Box>
+              </Box>
+              <Divider />
+            </Box>
           ))}
-        </div>
+        </Box>
       ))}
-    </div>
+    </Paper>
   );
 }
 ```
@@ -2202,51 +2093,39 @@ export function useTransfersListPage() {
 - [ ] **Step 6: Crear `src/pages/TransfersListPage/TransfersListPage.jsx`** (reemplaza stub)
 
 ```jsx
+import { Box, AppBar, Toolbar, IconButton, Typography, Alert, Container } from '@mui/material';
+import { FiArrowLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useTransfersListPage } from './hooks/useTransfersListPage';
 import TransferList from '../../components/transfers/TransferList';
 import FiltersBar from '../../components/transfers/FiltersBar';
-import ErrorMessage from '../../components/ui/ErrorMessage';
-
-const navStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 'var(--space-4)',
-  padding: 'var(--space-4) var(--space-6)',
-  background: 'var(--color-primary)',
-  color: 'var(--color-text-inverse)',
-};
-
-const mainStyle = {
-  padding: 'var(--space-6)',
-  maxWidth: '480px',
-  margin: '0 auto',
-};
 
 export default function TransfersListPage() {
   const navigate = useNavigate();
   const { transfers, isLoading, isError, setFilters } = useTransfersListPage();
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-surface)' }}>
-      <nav style={navStyle}>
-        <button
-          onClick={() => navigate('/dashboard')}
-          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: '20px' }}
-        >
-          ←
-        </button>
-        <span style={{ fontFamily: 'var(--font-headline)', fontWeight: 600 }}>Transferencias</span>
-      </nav>
-      <main style={mainStyle}>
-        <ErrorMessage
-          message="No se pudo cargar el historial. Intenta de nuevo."
-          visible={isError}
-        />
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton color="inherit" onClick={() => navigate('/dashboard')} edge="start">
+            <FiArrowLeft />
+          </IconButton>
+          <Typography variant="h6" fontWeight={600} sx={{ ml: 1 }}>
+            Transferencias
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm" sx={{ py: 3 }}>
+        {isError && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            No se pudo cargar el historial. Intenta de nuevo.
+          </Alert>
+        )}
         <FiltersBar onFilter={setFilters} />
         <TransferList transfers={transfers} loading={isLoading} />
-      </main>
-    </div>
+      </Container>
+    </Box>
   );
 }
 ```
