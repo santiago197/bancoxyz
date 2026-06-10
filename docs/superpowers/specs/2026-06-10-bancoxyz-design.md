@@ -239,11 +239,12 @@ src/
 │  └──────────────────────────┘  │
 │                                │
 │  ┌──────────────────────────┐  │
-│  │ Nombre | Monto | Fecha   │  │  TransferList — tabla
+│  │ Movimientos              │  TransferList — tabla
 │  │ ───────────────────────  │  │
-│  │ Ana G. | $500K | 2026-06 │  │
-│  │ Luis P.| $120K | 2026-05 │  │
-│  │ ...                      │  │
+│  │ 1 de JUNIO               │
+│  │ Luis P.    | $120K       │
+│  │31 de MAYO                │
+│  │ Maria P.    | $120K      │  │
 │  └──────────────────────────┘  │
 │                                │
 │  [Loader] / [Sin resultados]   │

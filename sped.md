@@ -377,3 +377,107 @@ src/api/
   transfer.api.js
 
 > Define un solo archivo de configuración base de consulta al api. 
+
+1. Autenticación
+POST /login
+Realiza el inicio de sesión del usuario.
+
+- Punto final de la API: https://qf5k9fspl0.execute-api.us-east1.amazonaws.com/default/login
+Correo electrónico Contraseña ID Nombre
+gabriel@topaz.com 1111 1
+Gabriel
+Topaz
+alejo@topaz.com 2222 2
+Alejo
+Topaz
+wilson@topaz.com 3333 3
+Wilson
+Topaz
+Cuerpo de la solicitud:
+{
+"email": "string",
+"password": "string"
+}
+Respuesta:
+{
+"token": "string",
+"user": {
+"id": 0,
+"name": "string",
+"email": "string"
+}
+}
+Códigos de estado:
+200 OK: Inicio de sesión correcto.
+
+401 No autorizado: Credenciales no válidas.
+
+2. Obtener saldo
+GET /balance
+Recupera el saldo actual de la cuenta del usuario.
+
+- Punto final de la API: 2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance
+- Token: fake-jwt-token
+Encabezados:
+Autenticación: Bearer <TokenLogin>
+Respuesta:
+
+{ "moneda": "cadena",
+
+"saldo de la cuenta": número
+
+}
+Códigos de estado:
+200 OK: Saldo recuperado correctamente.
+
+401 No autorizado: Token de autenticación no válido.
+
+3. Transferencia bancaria
+POST /transfer
+Realiza una transferencia bancaria.
+
+- Punto final de la API: https://ofqx4zxgcf.execute-api.us-east1.amazonaws.com/default/transfer
+- Token: fake-jwt-token
+Encabezados:
+Authorization: Bearer <TokenLogin>
+Cuerpo de la solicitud:
+
+{ "valor": número,
+"moneda": cadena",
+"documento del pagador": cadena",
+"fecha de transferencia": cadena" // Formato: AAAA-MM-DD
+}
+Respuesta:
+
+{ "estado": "éxito" // o "error" según el resultado
+}
+Códigos de estado:
+200 OK, transferencia completada con éxito.
+
+400 Solicitud incorrecta: datos de transferencia no válidos.
+
+401 No autorizado: token de autenticación no válido.
+
+4. Listar transferencias
+GET /transferlist
+Recupera una lista de las transferencias realizadas por el usuario. - Punto final de la API: https://n0qaa2fx3c.execute-api.us-east1.amazonaws.com/default/transferList
+Encabezados:
+Autenticación: Bearer <TokenLogin>
+Respuesta:
+
+[ { "valor": número,
+"fecha": cadena", // Formato: AAAA-MM-DD
+"moneda": cadena",
+"beneficiario": {
+"documento": cadena",
+"nombre": cadena"
+
+}
+}
+
+]
+Códigos de estado:
+
+200 OK: Lista de transferencias recuperada correctamente.
+
+401 No autorizado: Token de autenticación no válido.
