@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const TRANSFER_URL = 'https://ofqx4zxgcf.execute-api.us-east-1.amazonaws.com/default/transfer';
+const TRANSFER_URL = process.env.REACT_APP_TRANSFER_URL;
 
 export async function postTransfer({ valor, moneda, documento_pagador, fecha_transferencia }) {
   const { data } = await axiosClient.post(TRANSFER_URL, {
