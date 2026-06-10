@@ -8,7 +8,14 @@
       "mcp__stitch__list_screens",
       "Bash(npm install:*)",
       "Bash(npm list:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm test:*)",
+      "Bash(find /c/Users/santi/Desktop/DESARROLLOS/bancoxyz/src/tests -type f -name *.js)",
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
