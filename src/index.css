@@ -8,9 +8,9 @@
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-surface);
-  color: var(--color-text-primary);
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: #F5F7FA;
+  color: #0D1B2A;
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
