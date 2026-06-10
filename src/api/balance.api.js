@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 
-const BALANCE_URL = 'https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance';
+const BALANCE_URL = process.env.REACT_APP_BALANCE_URL;
 
 export async function getBalance() {
   const { data } = await axiosClient.get(BALANCE_URL);
