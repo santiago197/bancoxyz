@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useInput } from './useInput';
 
 export default function Input({
   label,
@@ -12,9 +12,7 @@ export default function Input({
   required = false,
   name,
 }) {
-  const [showPassword, setShowPassword] = useState(false);
-  const isPassword = type === 'password';
-  const inputType = isPassword && showPassword ? 'text' : type;
+  const { isPassword, inputType, showPassword, togglePassword } = useInput(type);
 
   return (
     <TextField
@@ -37,7 +35,7 @@ export default function Input({
                 <InputAdornment position="end">
                   <IconButton
                     aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                    onClick={() => setShowPassword((v) => !v)}
+                    onClick={togglePassword}
                     edge="end"
                   >
                     {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
