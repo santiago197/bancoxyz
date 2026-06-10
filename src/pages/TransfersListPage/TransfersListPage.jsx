@@ -12,13 +12,14 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { useTransfersListPage } from './hooks/useTransfersListPage';
 import FiltersBar from '../../components/transfers/FiltersBar';
 import TransferList from '../../components/transfers/TransferList';
+import BottomTabBar from '../../components/ui/BottomTabBar';
 
 export default function TransfersListPage() {
   const navigate = useNavigate();
   const { transfers, isLoading, isError, setFilters } = useTransfersListPage();
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', pb: { xs: '80px', md: 0 } }}>
       <AppBar position="static" color="primary" elevation={0}>
         <Toolbar>
           <IconButton
@@ -46,6 +47,10 @@ export default function TransfersListPage() {
         <FiltersBar onFilter={setFilters} />
         <TransferList transfers={transfers} loading={isLoading} />
       </Container>
+
+      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+        <BottomTabBar />
+      </Box>
     </Box>
   );
 }

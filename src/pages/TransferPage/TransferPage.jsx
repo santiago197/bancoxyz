@@ -11,6 +11,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useTransferPage } from './hooks/useTransferPage';
 import TransferForm from '../../components/transfer/TransferForm';
+import BottomTabBar from '../../components/ui/BottomTabBar';
 
 export default function TransferPage() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function TransferPage() {
     useTransferPage();
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', pb: { xs: '80px', md: 4 } }}>
       <AppBar position="static" elevation={0}>
         <Toolbar>
           <IconButton
@@ -49,6 +50,10 @@ export default function TransferPage() {
           />
         </Paper>
       </Container>
+
+      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+        <BottomTabBar />
+      </Box>
     </Box>
   );
 }
