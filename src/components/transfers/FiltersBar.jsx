@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Paper, Box, TextField } from '@mui/material';
+import { Paper, Box, TextField, InputAdornment, Button, Stack } from '@mui/material';
+import { FiSearch } from 'react-icons/fi';
 
-export default function FiltersBar({ onFilter }) {
+export default function FiltersBar({ onFilter, isDesktop = false }) {
   const [fields, setFields] = useState({
     nombre: '',
     montoMin: '',
@@ -14,9 +15,98 @@ export default function FiltersBar({ onFilter }) {
     const { name, value } = e.target;
     const updated = { ...fields, [name]: value };
     setFields(updated);
-    onFilter(updated);
+    if (!isDesktop) onFilter(updated);
   }
 
+  function handleApply() {
+    onFilter(fields);
+  }
+
+  function handleReset() {
+    const cleared = { nombre: '', montoMin: '', montoMax: '', desde: '', hasta: '' };
+    setFields(cleared);
+    onFilter(cleared);
+  }
+
+  if (isDesktop) {
+    return (
+      <Paper elevation={0} sx={{ p: 2, mb: 2, border: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+        <Stack direction="row" spacing={2} alignItems="flex-end" flexWrap="wrap">
+          <TextField
+            name="nombre"
+            value={fields.nombre}
+            onChange={handleChange}
+            placeholder="Buscar por nombre..."
+            size="small"
+            sx={{ minWidth: 200, flex: 1 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FiSearch size={16} />
+                </InputAdornment>
+              ),
+            }}
+            label="Nombre del beneficiario"
+          />
+          <TextField
+            name="montoMin"
+            value={fields.montoMin}
+            onChange={handleChange}
+            label="Monto mín"
+            type="number"
+            size="small"
+            sx={{ width: 130 }}
+          />
+          <TextField
+            name="montoMax"
+            value={fields.montoMax}
+            onChange={handleChange}
+            label="Monto máx"
+            type="number"
+            size="small"
+            sx={{ width: 130 }}
+          />
+          <TextField
+            name="desde"
+            value={fields.desde}
+            onChange={handleChange}
+            label="Desde"
+            type="date"
+            size="small"
+            sx={{ width: 150 }}
+            InputLabelProps={{ shrink: true }}
+          />
+          <TextField
+            name="hasta"
+            value={fields.hasta}
+            onChange={handleChange}
+            label="Hasta"
+            type="date"
+            size="small"
+            sx={{ width: 150 }}
+            InputLabelProps={{ shrink: true }}
+          />
+          <Button
+            variant="contained"
+            size="medium"
+            onClick={handleApply}
+            sx={{ fontWeight: 700, px: 3 }}
+          >
+            Filtrar
+          </Button>
+          <Button
+            variant="outlined"
+            size="medium"
+            onClick={handleReset}
+          >
+            Limpiar
+          </Button>
+        </Stack>
+      </Paper>
+    );
+  }
+
+  // Mobile layout
   return (
     <Paper elevation={1} sx={{ p: 2, mb: 2 }}>
       <Box sx={{ mb: 1.5 }}>
@@ -28,6 +118,13 @@ export default function FiltersBar({ onFilter }) {
           inputProps={{ 'aria-label': 'Filtrar por nombre' }}
           size="small"
           fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <FiSearch size={16} />
+              </InputAdornment>
+            ),
+          }}
         />
       </Box>
 
