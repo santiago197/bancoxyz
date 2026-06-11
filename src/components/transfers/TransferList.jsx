@@ -70,18 +70,20 @@ export default function TransferList({ transfers = [], loading }) {
                   <Typography variant="body2" fontWeight={600} color="text.primary">
                     {transfer.beneficiario?.nombre}
                   </Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    ID: {transfer.beneficiario?.documento}
-                  </Typography>
-                  {transfer.status === 'programada' && (
-                    <Chip
-                      label="Transferencia programada"
-                      size="small"
-                      color="warning"
-                      variant="outlined"
-                      sx={{ mt: 0.5, height: 20, fontSize: '0.65rem' }}
-                    />
-                  )}
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Typography variant="caption" color="text.secondary">
+                      ID: {transfer.beneficiario?.documento}
+                    </Typography>
+                    {transfer.status === 'programada' && (
+                      <Chip
+                        label="Transferencia programada"
+                        size="small"
+                        variant="outlined"
+                        color="warning"
+                        sx={{ fontSize: 10, height: 22 }}
+                      />
+                    )}
+                  </Box>
                 </Box>
 
                 <Box sx={{ textAlign: 'right' }}>

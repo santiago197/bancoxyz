@@ -15,6 +15,7 @@ import {
   useTheme,
   Link,
   Button,
+  Divider,
 } from '@mui/material';
 import {
   FiLogOut,
@@ -25,6 +26,7 @@ import {
   FiCreditCard,
   FiHeadphones,
   FiArrowUpRight,
+  FiClock,
   FiShield,
 } from 'react-icons/fi';
 import UiButton from '../../components/ui/Button';
@@ -35,8 +37,9 @@ import { useDashboardPage } from './hooks/useDashboardPage';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 
 function ActivityItem({ transfer, index }) {
-  const color = '#ef5350';
-  const icon = <FiArrowUpRight size={18} />;
+  const isScheduled = transfer.status === 'programada';
+  const color = isScheduled ? '#f57c00' : '#ef5350';
+  const icon = isScheduled ? <FiClock size={18} /> : <FiArrowUpRight size={18} />;
   const name = transfer.beneficiario?.nombre ?? transfer.nombre ?? 'Transferencia';
 
   return (
@@ -60,9 +63,20 @@ function ActivityItem({ transfer, index }) {
           <Typography variant="body2" fontWeight={600} noWrap sx={{ maxWidth: { xs: 160, md: 220 } }}>
             {name}
           </Typography>
-          <Typography variant="caption" color="text.secondary">
-            {formatDate(transfer.fecha)}
-          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography variant="caption" color="text.secondary">
+              {formatDate(transfer.fecha)}
+            </Typography>
+            {transfer.status === 'programada' && (
+              <Chip
+                label="Transferencia programada"
+                size="small"
+                variant="outlined"
+                color="warning"
+                sx={{  fontSize: 10, height: 22 }}
+              />
+            )}
+          </Box>
         </Box>
       </Box>
       <Box sx={{ textAlign: 'right' }}>
