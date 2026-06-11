@@ -13,6 +13,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { FiArrowLeft, FiUser, FiMail, FiHash, FiLogOut } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useSettingsPage } from './hooks/useSettingsPage';
@@ -126,12 +127,12 @@ export default function SettingsPage() {
                 sx={{
                   width: 72,
                   height: 72,
-                  bgcolor: 'rgba(255,255,255,0.2)',
+                  bgcolor: (theme) => alpha(theme.palette.common.white, 0.2),
                   color: 'common.white',
                   fontSize: 28,
                   fontWeight: 700,
                   mb: 1.5,
-                  border: '3px solid rgba(255,255,255,0.4)',
+                  border: (theme) => `3px solid ${alpha(theme.palette.common.white, 0.4)}`,
                 }}
               >
                 {initials}

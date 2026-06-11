@@ -1,4 +1,5 @@
 import { CircularProgress, Box } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 
 export default function Loader({ fullScreen = false, size = 'md' }) {
   const sizes = { sm: 20, md: 36, lg: 56 };
@@ -10,7 +11,7 @@ export default function Loader({ fullScreen = false, size = 'md' }) {
     return (
       <Box sx={{
         position: 'fixed', inset: 0,
-        bgcolor: 'rgba(255,255,255,0.7)',
+        bgcolor: (theme) => alpha(theme.palette.common.white, 0.7),
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         zIndex: 1000,
       }}>

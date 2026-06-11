@@ -1,4 +1,5 @@
 import { Box, Typography, Chip, Button } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 // import { FiTrendingUp } from 'react-icons/fi';
 import Loader from '../ui/Loader';
 import { formatCurrency } from '../../utils/formatters';
@@ -28,7 +29,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
             <Box sx={{ flex: 1 }}>
               <Typography
                 variant="overline"
-                sx={{ color: 'rgba(255,255,255,0.65)', letterSpacing: 1.5, fontSize: 11 }}
+                sx={{ color: (theme) => alpha(theme.palette.common.white, 0.65), letterSpacing: 1.5, fontSize: 11 }}
               >
                 {desktopVariant ? 'SALDO TOTAL DISPONIBLE' : 'Tu saldo disponible'}
               </Typography>
@@ -60,9 +61,9 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                   size="small"
                   sx={{
                     color: 'common.white',
-                    borderColor: 'rgba(255,255,255,0.6)',
+                    borderColor: (theme) => alpha(theme.palette.common.white, 0.6),
                     fontWeight: 600,
-                    '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' },
+                    '&:hover': { borderColor: 'common.white', bgcolor: (theme) => alpha(theme.palette.common.white, 0.1) },
                   }}
                 >
                   Añadir dinero
@@ -74,7 +75,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                     bgcolor: 'common.white',
                     color: 'primary.main',
                     fontWeight: 700,
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
+                    '&:hover': { bgcolor: (theme) => alpha(theme.palette.common.white, 0.9) },
                   }}
                 >
                   Gestionar
@@ -90,7 +91,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                 label={moneda}
                 size="small"
                 sx={{
-                  bgcolor: 'rgba(255,255,255,0.2)',
+                  bgcolor: (theme) => alpha(theme.palette.common.white, 0.2),
                   color: 'common.white',
                   fontWeight: 600,
                   fontSize: '12px',

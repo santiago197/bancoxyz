@@ -1,4 +1,5 @@
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Button, Divider } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { FiHome, FiRepeat, FiSettings } from 'react-icons/fi';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -25,7 +26,7 @@ function DesktopSidebar() {
           width: SIDEBAR_WIDTH,
           boxSizing: 'border-box',
           bgcolor: 'primary.main',
-          color: 'white',
+          color: 'common.white',
           borderRight: 'none',
         },
       }}
@@ -35,12 +36,12 @@ function DesktopSidebar() {
         <Typography variant="h6" fontWeight={700} sx={{ color: 'white', lineHeight: 1 }}>
           BancoXYZ
         </Typography>
-        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)' }}>
+        <Typography variant="caption" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.6) }}>
           Banca Segura
         </Typography>
       </Box>
 
-      <Divider sx={{ borderColor: 'rgba(255,255,255,0.12)' }} />
+      <Divider sx={{ borderColor: (theme) => alpha(theme.palette.common.white, 0.12) }} />
 
       {/* Nav links */}
       <List sx={{ px: 1, pt: 1, flex: 1 }}>
@@ -53,8 +54,8 @@ function DesktopSidebar() {
                 disabled={!item.path}
                 sx={{
                   borderRadius: 2,
-                  bgcolor: active ? 'rgba(255,255,255,0.15)' : 'transparent',
-                  '&:hover': { bgcolor: 'rgba(255,255,255,0.1)' },
+                  bgcolor: active ? (theme) => alpha(theme.palette.common.white, 0.15) : 'transparent',
+                  '&:hover': { bgcolor: (theme) => alpha(theme.palette.common.white, 0.1) },
                   '&.Mui-disabled': { opacity: 0.5 },
                 }}
               >
@@ -79,11 +80,11 @@ function DesktopSidebar() {
           variant="contained"
           onClick={() => navigate('/transfer')}
           sx={{
-            bgcolor: 'white',
+            bgcolor: 'common.white',
             color: 'primary.main',
             fontWeight: 700,
             borderRadius: 2,
-            '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
+            '&:hover': { bgcolor: (theme) => alpha(theme.palette.common.white, 0.9) },
           }}
         >
           Nueva transferencia

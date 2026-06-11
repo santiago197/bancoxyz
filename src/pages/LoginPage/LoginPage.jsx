@@ -1,4 +1,5 @@
 import { Box, Paper, Typography, Link } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { useLoginPage } from './hooks/useLoginPage';
 import LoginForm from './components/LoginForm';
 
@@ -28,21 +29,21 @@ export default function LoginPage() {
           <Typography variant="h2" sx={{ color: 'primary.contrastText', fontWeight: 700, lineHeight: 1.3, mb: 2 }}>
             La seguridad de su patrimonio es nuestra prioridad.
           </Typography>
-          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.72)', lineHeight: 1.6 }}>
+          <Typography variant="body2" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.72), lineHeight: 1.6 }}>
             Accede a sus cuentas con la tranquilidad de contar con los estándares más altos de
             cifrado bancario internacional.
           </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)' }}>
+          <Typography variant="caption" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.5) }}>
             © 2026 BancoXYZ S.A.
           </Typography>
           <Box sx={{ display: 'flex', gap: 2 }}>
-            <Link href="#" underline="hover" sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '12px' }}>
+            <Link href="#" underline="hover" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.5), fontSize: '12px' }}>
               Privacidad
             </Link>
-            <Link href="#" underline="hover" sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '12px' }}>
+            <Link href="#" underline="hover" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.5), fontSize: '12px' }}>
               Seguridad
             </Link>
           </Box>

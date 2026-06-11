@@ -114,17 +114,17 @@ function PromoCard() {
       <Typography variant="h6" fontWeight={700} sx={{ color: 'common.white', mb: 0.5, lineHeight: 1.3 }}>
         Tu primer crédito al 0%
       </Typography>
-      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', display: 'block', mb: 2 }}>
+      <Typography variant="caption" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.7), display: 'block', mb: 2 }}>
         Sujeto a aprobación crediticia. Términos y condiciones aplican.
       </Typography>
       <Button
         size="small"
         sx={{
-          bgcolor: 'white',
+          bgcolor: 'common.white',
           color: 'primary.main',
           fontWeight: 700,
           borderRadius: 1.5,
-          '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
+          '&:hover': { bgcolor: (theme) => alpha(theme.palette.common.white, 0.9) },
         }}
       >
         Solicitar ahora
@@ -157,7 +157,7 @@ export default function DashboardPage() {
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {user?.name && (
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.85)' }}>
+                <Typography variant="body2" sx={{ color: (theme) => alpha(theme.palette.common.white, 0.85) }}>
                   Hola, {user.name}
                 </Typography>
               )}
@@ -166,7 +166,7 @@ export default function DashboardPage() {
                 aria-label="Salir"
                 sx={{
                   color: 'common.white',
-                  border: '1px solid rgba(255,255,255,0.5)',
+                  border: (theme) => `1px solid ${alpha(theme.palette.common.white, 0.5)}`,
                   borderRadius: '8px',
                   px: 1.5,
                   py: 0.5,
