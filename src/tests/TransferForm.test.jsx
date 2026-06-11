@@ -6,6 +6,7 @@ import TransferPage from '../pages/TransferPage/TransferPage';
 jest.mock('../hooks/useTransferMutation', () => ({
   useTransferMutation: jest.fn(),
 }));
+
 import { useTransferMutation } from '../hooks/useTransferMutation';
 
 const wrapper = ({ children }) => (
@@ -22,7 +23,7 @@ describe('TransferPage — validaciones del formulario', () => {
   it('muestra error si monto es 0', async () => {
     render(<TransferPage />, { wrapper });
     fireEvent.change(screen.getByLabelText(/monto/i), { target: { value: '0' } });
-    fireEvent.click(screen.getByRole('button', { name: /transferir/i }));
+    fireEvent.click(screen.getByTestId('btn-submit-transfer'));
     await waitFor(() => {
       expect(screen.getByText(/mayor a 0/i)).toBeInTheDocument();
     });
@@ -30,7 +31,7 @@ describe('TransferPage — validaciones del formulario', () => {
 
   it('muestra error si documento está vacío', async () => {
     render(<TransferPage />, { wrapper });
-    fireEvent.click(screen.getByRole('button', { name: /transferir/i }));
+    fireEvent.click(screen.getByTestId('btn-submit-transfer'));
     await waitFor(() => {
       expect(screen.getByText(/documento es requerido/i)).toBeInTheDocument();
     });
@@ -45,7 +46,7 @@ describe('TransferPage — validaciones del formulario', () => {
     fireEvent.change(screen.getByLabelText(/monto/i), { target: { value: '500000' } });
     fireEvent.change(screen.getByLabelText(/documento/i), { target: { value: '12345678' } });
     fireEvent.change(screen.getByLabelText(/fecha/i), { target: { value: today } });
-    fireEvent.click(screen.getByRole('button', { name: /transferir/i }));
+    fireEvent.click(screen.getByTestId('btn-submit-transfer'));
 
     await waitFor(() => {
       expect(mutateMock).toHaveBeenCalledWith(

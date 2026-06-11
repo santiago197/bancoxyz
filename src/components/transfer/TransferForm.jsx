@@ -97,6 +97,7 @@ export default function TransferForm({
         loading={loading}
         startIcon={<FiSend size={18} />}
         fullWidth
+        data-testid="btn-submit-transfer"
       >
         Transferir
       </Button>

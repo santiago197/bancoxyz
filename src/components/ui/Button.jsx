@@ -9,12 +9,14 @@ export default function Button({
   type = 'button',
   fullWidth = true,
   startIcon,
+  ...rest
 }) {
   const muiVariant = variant === 'secondary' ? 'outlined' : 'contained';
   const color = variant === 'ghost' ? 'secondary' : 'primary';
 
   return (
     <MuiButton
+      {...rest}
       type={type}
       variant={muiVariant}
       color={color}
