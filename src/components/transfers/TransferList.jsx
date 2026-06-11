@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography, Paper, Divider } from '@mui/material';
+import { Box, CircularProgress, Typography, Paper, Divider, Chip } from '@mui/material';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 
 function groupByDate(transfers) {
@@ -73,6 +73,15 @@ export default function TransferList({ transfers = [], loading }) {
                   <Typography variant="caption" color="text.secondary">
                     ID: {transfer.beneficiario?.documento}
                   </Typography>
+                  {transfer.status === 'programada' && (
+                    <Chip
+                      label="Transferencia programada"
+                      size="small"
+                      color="warning"
+                      variant="outlined"
+                      sx={{ mt: 0.5, height: 20, fontSize: '0.65rem' }}
+                    />
+                  )}
                 </Box>
 
                 <Box sx={{ textAlign: 'right' }}>

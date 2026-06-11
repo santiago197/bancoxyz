@@ -149,7 +149,7 @@ export default function TransferPage() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert onClose={handleSuccessClose} severity="success" variant="filled" sx={{ width: '100%' }}>
-          Transferencia realizada con éxito
+          {isScheduled ? 'Transferencia programada con éxito' : 'Transferencia realizada con éxito'}
         </Alert>
       </Snackbar>
     </AppLayout>
