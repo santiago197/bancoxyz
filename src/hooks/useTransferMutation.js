@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postTransfer } from '../api/transfer.api';
+import { saveLocalTransfer } from '../utils/localTransfers';
 
 export function useTransferMutation() {
   const queryClient = useQueryClient();
@@ -7,7 +8,8 @@ export function useTransferMutation() {
   return useMutation({
     mutationFn: postTransfer,
     retry: false,
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      saveLocalTransfer(variables);
       queryClient.invalidateQueries({ queryKey: ['transfers'] });
     },
   });
