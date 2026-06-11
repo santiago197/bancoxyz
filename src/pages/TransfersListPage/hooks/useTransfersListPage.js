@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useTransfersQuery } from '../../../hooks/useTransfersQuery';
 
 function applyFilters(transfers, filters) {
-  if (!transfers) return [];
+  if (!Array.isArray(transfers)) return [];
   return transfers.filter((t) => {
     const nombre = filters.nombre?.trim().toLowerCase();
     if (nombre && !t.beneficiario?.nombre?.toLowerCase().includes(nombre)) return false;

@@ -18,6 +18,7 @@ export default function TransferForm({
   onSubmit,
   loading,
   isError,
+  apiError,
   isScheduled,
 }) {
   return (
@@ -87,7 +88,7 @@ export default function TransferForm({
 
       {isError && (
         <Alert severity="error" sx={{ mb: 2, borderRadius: '8px' }}>
-          Ocurrió un error al procesar la transferencia. Intenta de nuevo.
+          {apiError ?? 'Ocurrió un error al procesar la transferencia. Intenta de nuevo.'}
         </Alert>
       )}
 

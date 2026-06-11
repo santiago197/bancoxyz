@@ -7,7 +7,7 @@ const today = () => new Date().toISOString().split('T')[0];
 
 export function useTransferPage() {
   const navigate = useNavigate();
-  const { mutate, isPending, isError } = useTransferMutation();
+  const { mutate, isPending, isError, error } = useTransferMutation();
 
   const [form, setForm] = useState({
     valor: '',
@@ -56,6 +56,7 @@ export function useTransferPage() {
   }
 
   const isScheduled = form.fecha_transferencia > today();
+  const apiError = error?.response?.data?.message ?? null;
 
   return {
     form,
@@ -65,5 +66,6 @@ export function useTransferPage() {
     isPending,
     isError,
     isScheduled,
+    apiError,
   };
 }
