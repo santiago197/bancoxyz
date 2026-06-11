@@ -7,10 +7,10 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, #0A2463 0%, #1565C0 100%)',
+        background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
         borderRadius: '16px',
         p: { xs: 3, md: 4 },
-        color: '#fff',
+        color: 'common.white',
         minHeight: { xs: 140, md: 160 },
         display: 'flex',
         flexDirection: 'column',
@@ -35,7 +35,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
               <Typography
                 variant="h2"
                 sx={{
-                  color: '#fff',
+                  color: 'common.white',
                   fontWeight: 700,
                   mt: 0.5,
                   fontSize: { xs: '28px', md: '36px' },
@@ -59,7 +59,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                   variant="outlined"
                   size="small"
                   sx={{
-                    color: 'white',
+                    color: 'common.white',
                     borderColor: 'rgba(255,255,255,0.6)',
                     fontWeight: 600,
                     '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' },
@@ -71,7 +71,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                   variant="contained"
                   size="small"
                   sx={{
-                    bgcolor: 'white',
+                    bgcolor: 'common.white',
                     color: 'primary.main',
                     fontWeight: 700,
                     '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
@@ -91,7 +91,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                 size="small"
                 sx={{
                   bgcolor: 'rgba(255,255,255,0.2)',
-                  color: '#fff',
+                  color: 'common.white',
                   fontWeight: 600,
                   fontSize: '12px',
                   height: 24,

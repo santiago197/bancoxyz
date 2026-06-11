@@ -119,7 +119,7 @@ export default function SettingsPage() {
                 alignItems: 'center',
                 py: 4,
                 px: 3,
-                background: 'linear-gradient(135deg, #0A2463 0%, #1565C0 100%)',
+                background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
               }}
             >
               <Avatar
@@ -127,7 +127,7 @@ export default function SettingsPage() {
                   width: 72,
                   height: 72,
                   bgcolor: 'rgba(255,255,255,0.2)',
-                  color: '#fff',
+                  color: 'common.white',
                   fontSize: 28,
                   fontWeight: 700,
                   mb: 1.5,
@@ -136,7 +136,7 @@ export default function SettingsPage() {
               >
                 {initials}
               </Avatar>
-              <Typography variant="h6" fontWeight={700} sx={{ color: '#fff' }}>
+              <Typography variant="h6" fontWeight={700} sx={{ color: 'common.white' }}>
                 {user?.name ?? 'Usuario'}
               </Typography>
               <Chip
@@ -145,7 +145,7 @@ export default function SettingsPage() {
                 sx={{
                   mt: 1,
                   bgcolor: 'warning.main',
-                  color: '#fff',
+                  color: 'common.white',
                   fontWeight: 700,
                   fontSize: 10,
                 }}

@@ -17,6 +17,7 @@ import {
   Button,
   // Divider,
 } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import {
   FiLogOut,
   FiRepeat,
@@ -37,8 +38,9 @@ import { useDashboardPage } from './hooks/useDashboardPage';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 
 function ActivityItem({ transfer, index }) {
+  const theme = useTheme();
   const isScheduled = transfer.status === 'programada';
-  const color = isScheduled ? '#f57c00' : '#ef5350';
+  const color = isScheduled ? theme.palette.warning.main : theme.palette.error.light;
   const icon = isScheduled ? <FiClock size={18} /> : <FiArrowUpRight size={18} />;
   const name = transfer.beneficiario?.nombre ?? transfer.nombre ?? 'Transferencia';
 
@@ -56,7 +58,7 @@ function ActivityItem({ transfer, index }) {
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <Avatar sx={{ width: 38, height: 38, bgcolor: `${color}22`, color }}>
+        <Avatar sx={{ width: 38, height: 38, bgcolor: alpha(color, 0.13), color }}>
           {icon}
         </Avatar>
         <Box>
@@ -98,18 +100,18 @@ function PromoCard() {
       sx={{
         borderRadius: 2,
         overflow: 'hidden',
-        background: 'linear-gradient(135deg, #0A2463 0%, #1565C0 100%)',
+        background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
         p: 2.5,
-        color: '#fff',
+        color: 'common.white',
         mt: 2,
       }}
     >
       <Chip
         label="OFERTA EXCLUSIVA"
         size="small"
-        sx={{ bgcolor: 'warning.main', color: 'white', fontWeight: 700, fontSize: 10, mb: 1 }}
+        sx={{ bgcolor: 'warning.main', color: 'common.white', fontWeight: 700, fontSize: 10, mb: 1 }}
       />
-      <Typography variant="h6" fontWeight={700} sx={{ color: '#fff', mb: 0.5, lineHeight: 1.3 }}>
+      <Typography variant="h6" fontWeight={700} sx={{ color: 'common.white', mb: 0.5, lineHeight: 1.3 }}>
         Tu primer crédito al 0%
       </Typography>
       <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', display: 'block', mb: 2 }}>
@@ -150,7 +152,7 @@ export default function DashboardPage() {
           sx={{ display: { xs: 'flex', md: 'none' } }}
         >
           <Toolbar sx={{ justifyContent: 'space-between' }}>
-            <Typography variant="h6" fontWeight={700} sx={{ color: '#fff' }}>
+            <Typography variant="h6" fontWeight={700} sx={{ color: 'common.white' }}>
               BancoXYZ
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -163,7 +165,7 @@ export default function DashboardPage() {
                 onClick={handleLogout}
                 aria-label="Salir"
                 sx={{
-                  color: '#fff',
+                  color: 'common.white',
                   border: '1px solid rgba(255,255,255,0.5)',
                   borderRadius: '8px',
                   px: 1.5,
@@ -172,7 +174,7 @@ export default function DashboardPage() {
                 }}
               >
                 <FiLogOut size={18} />
-                <Typography variant="body2" sx={{ color: '#fff', fontWeight: 600 }}>
+                <Typography variant="body2" sx={{ color: 'common.white', fontWeight: 600 }}>
                   Salir
                 </Typography>
               </IconButton>
@@ -320,7 +322,7 @@ export default function DashboardPage() {
                       elevation={0}
                       sx={{ p: 2, borderRadius: 2, border: '1px solid', borderColor: 'divider' }}
                     >
-                      <Avatar sx={{ bgcolor: '#e3f2fd', color: '#1565C0', width: 36, height: 36, mb: 1 }}>
+                      <Avatar sx={{ bgcolor: (theme) => alpha(theme.palette.primary.light, 0.1), color: 'primary.light', width: 36, height: 36, mb: 1 }}>
                         <FiHeadphones size={18} />
                       </Avatar>
                       <Typography variant="caption" color="text.secondary" fontWeight={500}>
@@ -365,7 +367,7 @@ export default function DashboardPage() {
                       '&:hover': { bgcolor: 'action.hover' },
                     }}
                   >
-                    <Avatar sx={{ bgcolor: '#e8eaf6', color: 'primary.main', width: 36, height: 36 }}>
+                    <Avatar sx={{ bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08), color: 'primary.main', width: 36, height: 36 }}>
                       <FiRepeat size={18} />
                     </Avatar>
                     <Typography variant="body2" fontWeight={600}>
@@ -392,7 +394,7 @@ export default function DashboardPage() {
                       '&:hover': { bgcolor: 'action.hover' },
                     }}
                   >
-                    <Avatar sx={{ bgcolor: '#e3f2fd', color: '#1565C0', width: 36, height: 36 }}>
+                    <Avatar sx={{ bgcolor: (theme) => alpha(theme.palette.primary.light, 0.1), color: 'primary.light', width: 36, height: 36 }}>
                       <FiList size={18} />
                     </Avatar>
                     <Typography variant="body2" fontWeight={600}>
@@ -418,7 +420,9 @@ export default function DashboardPage() {
                     alignItems: 'flex-start',
                   }}
                 >
-                  <FiShield size={18} color="#1565C0" style={{ flexShrink: 0, marginTop: 2 }} />
+                  <Box component="span" sx={{ color: 'primary.light', display: 'inline-flex', flexShrink: 0, mt: '2px' }}>
+                    <FiShield size={18} color="inherit" />
+                  </Box>
                   <Typography variant="caption" color="text.secondary" lineHeight={1.5}>
                     Tu cuenta está protegida por encriptación de grado bancario.
                   </Typography>

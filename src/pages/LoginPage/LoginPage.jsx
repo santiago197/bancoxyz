@@ -20,12 +20,12 @@ export default function LoginPage() {
           p: 6,
         }}
       >
-        <Typography variant="h1" sx={{ color: 'white', fontSize: '32px', letterSpacing: '-0.5px' }}>
+        <Typography variant="h1" sx={{ color: 'primary.contrastText', fontSize: '32px', letterSpacing: '-0.5px' }}>
           BancoXYZ
         </Typography>
 
         <Box>
-          <Typography variant="h2" sx={{ color: 'white', fontWeight: 700, lineHeight: 1.3, mb: 2 }}>
+          <Typography variant="h2" sx={{ color: 'primary.contrastText', fontWeight: 700, lineHeight: 1.3, mb: 2 }}>
             La seguridad de su patrimonio es nuestra prioridad.
           </Typography>
           <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.72)', lineHeight: 1.6 }}>
@@ -67,7 +67,7 @@ export default function LoginPage() {
             pb: 5,
           }}
         >
-          <Typography variant="h1" sx={{ color: 'white', fontSize: '28px', letterSpacing: '-0.5px' }}>
+          <Typography variant="h1" sx={{ color: 'primary.contrastText', fontSize: '28px', letterSpacing: '-0.5px' }}>
             BancoXYZ
           </Typography>
         </Box>

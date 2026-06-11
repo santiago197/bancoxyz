@@ -90,13 +90,17 @@ export default function LoginForm({
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-          <FiLock size={13} color="#6B7A8D" />
+          <Box component="span" sx={{ color: 'text.secondary', display: 'inline-flex' }}>
+            <FiLock size={13} color="inherit" />
+          </Box>
           <Typography variant="caption" color="text.secondary" letterSpacing={0.5}>
             CONEXIÓN SEGURA
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-          <FiShield size={13} color="#6B7A8D" />
+          <Box component="span" sx={{ color: 'text.secondary', display: 'inline-flex' }}>
+            <FiShield size={13} color="inherit" />
+          </Box>
           <Typography variant="caption" color="text.secondary" letterSpacing={0.5}>
             AES-256 BIT
           </Typography>

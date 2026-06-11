@@ -108,19 +108,25 @@ export default function TransferPage() {
             {isDesktop ? (
               <>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <FiShield size={14} color="#2e7d32" />
+                  <Box component="span" sx={{ color: 'success.main', display: 'inline-flex' }}>
+                    <FiShield size={14} color="inherit" />
+                  </Box>
                   <Typography variant="caption" color="text.secondary" fontWeight={600}>
                     Encriptación 256-bit
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <FiLock size={14} color="#1565C0" />
+                  <Box component="span" sx={{ color: 'primary.light', display: 'inline-flex' }}>
+                    <FiLock size={14} color="inherit" />
+                  </Box>
                   <Typography variant="caption" color="text.secondary" fontWeight={600}>
                     Protección de Datos
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <FiEye size={14} color="#e65100" />
+                  <Box component="span" sx={{ color: 'warning.dark', display: 'inline-flex' }}>
+                    <FiEye size={14} color="inherit" />
+                  </Box>
                   <Typography variant="caption" color="warning.dark" fontWeight={700}>
                     CONEXIÓN SEGURA
                   </Typography>
@@ -128,7 +134,9 @@ export default function TransferPage() {
               </>
             ) : (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, textAlign: 'center' }}>
-                <FiShield size={16} color="#1565C0" />
+                <Box component="span" sx={{ color: 'primary.light', display: 'inline-flex' }}>
+                  <FiShield size={16} color="inherit" />
+                </Box>
                 <Typography variant="caption" color="text.secondary">
                   Transacción protegida por protocolos de cifrado AES-256 de BancoXYZ.
                 </Typography>
