@@ -13,7 +13,7 @@ export function useDashboardPage() {
   const moneda = data?.currency ?? 'USD';
 
   const { data: transfersData } = useTransfersQuery();
-  const recentActivity = Array.isArray(transfersData) ? transfersData.slice(0, 4) : [];
+  const recentActivity = Array.isArray(transfersData) ? transfersData.slice(0, 2) : [];
 
   function handleLogout() {
     logout();
