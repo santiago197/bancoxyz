@@ -72,9 +72,10 @@ function DesktopSidebar() {
       </List>
 
       {/* Nueva transferencia CTA */}
-      <Box sx={{ p: 2 }}>
+      <Box sx={{ p: 1 }}>
         <Button
           fullWidth
+          size='small'
           variant="contained"
           onClick={() => navigate('/transfer')}
           sx={{
@@ -84,7 +85,6 @@ function DesktopSidebar() {
             borderRadius: 2,
             '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
           }}
-          startIcon={<FiPlusCircle />}
         >
           Nueva transferencia
         </Button>

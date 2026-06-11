@@ -24,7 +24,7 @@ export default function Button({
       disabled={disabled || loading}
       onClick={onClick}
       startIcon={loading ? null : startIcon}
-      sx={{ py: '14px' }}
+      sx={{ py: { xs: '14px', md: '10px' } }}
     >
       {loading ? <CircularProgress size={20} color="inherit" /> : children}
     </MuiButton>

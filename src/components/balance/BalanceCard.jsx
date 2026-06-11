@@ -98,7 +98,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                 }}
               />
             )}
-            {desktopVariant && (
+            {/* {desktopVariant && (
               <Chip
                 icon={<FiTrendingUp size={13} color="#2e7d32" />}
                 label="+12.5% este mes"
@@ -112,7 +112,7 @@ export default function BalanceCard({ saldo, moneda, loading, desktopVariant = f
                   '& .MuiChip-icon': { color: '#a5d6a7' },
                 }}
               />
-            )}
+            )} */}
           </Box>
         </>
       )}

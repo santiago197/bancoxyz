@@ -31,7 +31,7 @@ export default function FiltersBar({ onFilter, isDesktop = false }) {
   if (isDesktop) {
     return (
       <Paper elevation={0} sx={{ p: 2, mb: 2, border: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
-        <Stack direction="row" spacing={2} alignItems="flex-end" flexWrap="wrap">
+        <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
           <TextField
             name="nombre"
             value={fields.nombre}
@@ -88,16 +88,17 @@ export default function FiltersBar({ onFilter, isDesktop = false }) {
           />
           <Button
             variant="contained"
-            size="medium"
+            size="small"
             onClick={handleApply}
-            sx={{ fontWeight: 700, px: 3 }}
+            sx={{ fontWeight: 700, px: 3, height: 40 }}
           >
             Filtrar
           </Button>
           <Button
             variant="outlined"
-            size="medium"
+            size="small"
             onClick={handleReset}
+            sx={{ height: 40 }}
           >
             Limpiar
           </Button>
