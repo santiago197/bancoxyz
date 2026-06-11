@@ -25,10 +25,7 @@ import {
   FiUser,
   FiCreditCard,
   FiHeadphones,
-  FiShoppingCart,
-  FiDollarSign,
-  FiCoffee,
-  FiArrowDownLeft,
+  FiArrowUpRight,
   FiShield,
 } from 'react-icons/fi';
 import UiButton from '../../components/ui/Button';
@@ -38,17 +35,9 @@ import AppLayout from '../../components/layout/AppLayout';
 import { useDashboardPage } from './hooks/useDashboardPage';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 
-const CATEGORY_ICONS = [
-  <FiShoppingCart size={18} />,
-  <FiDollarSign size={18} />,
-  <FiCoffee size={18} />,
-  <FiArrowDownLeft size={18} />,
-];
-const CATEGORY_COLORS = ['#ef5350', '#42a5f5', '#66bb6a', '#ab47bc'];
-
 function ActivityItem({ transfer, index }) {
-  const color = CATEGORY_COLORS[index % CATEGORY_COLORS.length];
-  const icon = CATEGORY_ICONS[index % CATEGORY_ICONS.length];
+  const color = '#ef5350';
+  const icon = <FiArrowUpRight size={18} />;
   const name = transfer.beneficiario?.nombre ?? transfer.nombre ?? 'Transferencia';
 
   return (
