@@ -15,7 +15,6 @@ import {
   useTheme,
   Link,
   Button,
-  Divider,
 } from '@mui/material';
 import {
   FiLogOut,

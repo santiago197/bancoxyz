@@ -15,7 +15,9 @@
       "Bash(find /c/Users/santi/Desktop/DESARROLLOS/bancoxyz/src/tests -type f -name *.js)",
       "Bash(python3:*)",
       "Bash(node:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "mcp__claude_ai_Vercel__deploy_to_vercel",
+      "Bash(vercel --version)"
     ]
   }
 }
