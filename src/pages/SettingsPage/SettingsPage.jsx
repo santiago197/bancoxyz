@@ -56,7 +56,7 @@ export default function SettingsPage() {
 
   return (
     <AppLayout>
-      <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', pb: { xs: '80px', md: 4 } }}>
+      <Box sx={{ minHeight: { xs: '100vh', md: 0 }, bgcolor: 'background.default', pb: { xs: '80px', md: 0 } }}>
 
         {/* Mobile AppBar */}
         <AppBar
@@ -97,7 +97,7 @@ export default function SettingsPage() {
           </Typography>
         </Box>
 
-        <Container maxWidth="sm" sx={{ py: { xs: 3, md: 6 } }}>
+        <Container maxWidth="sm" sx={{ py: { xs: 3, md: 3 } }}>
           {isDesktop && (
             <Box sx={{ mb: 3 }}>
               <Typography variant="h5" fontWeight={700}>
