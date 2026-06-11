@@ -4,6 +4,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 import DashboardPage from '../pages/DashboardPage/DashboardPage';
 import TransferPage from '../pages/TransferPage/TransferPage';
 import TransfersListPage from '../pages/TransfersListPage/TransfersListPage';
+import SettingsPage from '../pages/SettingsPage/SettingsPage';
 
 export default function AppRouter() {
   return (
@@ -13,6 +14,7 @@ export default function AppRouter() {
         <Route path="/dashboard" element={<AuthGuard><DashboardPage /></AuthGuard>} />
         <Route path="/transfer" element={<AuthGuard><TransferPage /></AuthGuard>} />
         <Route path="/transfers" element={<AuthGuard><TransfersListPage /></AuthGuard>} />
+        <Route path="/settings" element={<AuthGuard><SettingsPage /></AuthGuard>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

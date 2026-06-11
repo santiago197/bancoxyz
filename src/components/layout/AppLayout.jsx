@@ -7,7 +7,7 @@ const SIDEBAR_WIDTH = 220;
 const NAV_ITEMS = [
   { label: 'Inicio', path: '/dashboard', icon: <FiHome size={20} /> },
   { label: 'Transferencias', path: '/transfers', icon: <FiRepeat size={20} /> },
-  { label: 'Configuración', path: null, icon: <FiSettings size={20} /> },
+  { label: 'Configuración', path: '/settings', icon: <FiSettings size={20} /> },
 ];
 
 function DesktopSidebar() {

@@ -5,7 +5,7 @@ const TABS = [
   { label: 'Inicio', path: '/dashboard' },
   { label: 'Transferir', path: '/transfer' },
   { label: 'Pagos', path: '/transfers' },
-  { label: 'Más', path: null },
+  { label: 'Más', path: '/settings' },
 ];
 
 export function useBottomTabBar() {
