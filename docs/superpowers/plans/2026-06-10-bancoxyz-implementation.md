@@ -6,7 +6,9 @@
 
 **Architecture:** CRA con estructura por feature (page + hook + components). Cada página tiene su propio hook de negocio, los componentes son presentacionales puros. La capa API es un Singleton de Axios con interceptores de auth.
 
-**Tech Stack:** React 19, React Router v6, Zustand, TanStack Query v5, Axios, Jest + RTL, better-sqlite3, bcryptjs
+**Tech Stack:** React 19, **TypeScript**, React Router v6, Zustand, TanStack Query v5, Axios, Jest + RTL, better-sqlite3, bcryptjs
+
+**Lenguaje:** **TypeScript obligatorio** en todos los archivos — extensiones `.ts` para módulos puros y `.tsx` para componentes React. Configurar `tsconfig.json` con `"strict": true`. Tipado explícito en props de componentes (`interface`), retornos de hooks, y respuestas de API.
 
 **UI Framework:** Material UI (MUI) v5 — **OBLIGATORIO usar componentes MUI en toda la UI:**
 - Inputs → `TextField` de `@mui/material` (el componente `Input` wrappea TextField)
@@ -25,53 +27,55 @@
 ```
 src/
 ├── api/
-│   ├── axiosClient.js
-│   ├── auth.api.js
-│   ├── balance.api.js
-│   ├── transfer.api.js
-│   └── transferList.api.js
+│   ├── axiosClient.ts
+│   ├── auth.api.ts
+│   ├── balance.api.ts        # retorna BalanceResponse { currency, accountBalance }
+│   ├── transfer.api.ts
+│   └── transferList.api.ts
 ├── components/
 │   ├── ui/
-│   │   ├── Button.jsx
-│   │   ├── Input.jsx
-│   │   ├── Loader.jsx
-│   │   └── ErrorMessage.jsx
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   │   ├── Loader.tsx
+│   │   └── ErrorMessage.tsx
 │   ├── auth/
-│   │   └── AuthGuard.jsx
+│   │   └── AuthGuard.tsx
 │   ├── balance/
-│   │   └── BalanceCard.jsx
+│   │   └── BalanceCard.tsx
 │   ├── transfer/
-│   │   └── TransferForm.jsx
+│   │   └── TransferForm.tsx
 │   └── transfers/
-│       ├── TransferList.jsx
-│       └── FiltersBar.jsx
+│       ├── TransferList.tsx
+│       └── FiltersBar.tsx
 ├── hooks/
-│   ├── useLoginMutation.js
-│   ├── useBalanceQuery.js
-│   ├── useTransferMutation.js
-│   └── useTransfersQuery.js
+│   ├── useLoginMutation.ts
+│   ├── useBalanceQuery.ts
+│   ├── useTransferMutation.ts
+│   └── useTransfersQuery.ts
 ├── pages/
 │   ├── LoginPage/
-│   │   ├── LoginPage.jsx
-│   │   ├── hooks/useLoginPage.js
-│   │   └── components/LoginForm.jsx
+│   │   ├── LoginPage.tsx
+│   │   ├── hooks/useLoginPage.ts
+│   │   └── components/LoginForm.tsx
 │   ├── DashboardPage/
-│   │   ├── DashboardPage.jsx
-│   │   └── hooks/useDashboardPage.js
+│   │   ├── DashboardPage.tsx
+│   │   └── hooks/useDashboardPage.ts
 │   ├── TransferPage/
-│   │   ├── TransferPage.jsx
-│   │   └── hooks/useTransferPage.js
+│   │   ├── TransferPage.tsx
+│   │   └── hooks/useTransferPage.ts
 │   └── TransfersListPage/
-│       ├── TransfersListPage.jsx
-│       └── hooks/useTransfersListPage.js
+│       ├── TransfersListPage.tsx
+│       └── hooks/useTransfersListPage.ts
 ├── routes/
-│   └── AppRouter.jsx
+│   └── AppRouter.tsx
 ├── store/
-│   ├── authStore.js
-│   └── uiStore.js
+│   ├── authStore.ts
+│   └── uiStore.ts
+├── types/
+│   └── index.ts              # interfaces compartidas: User, BalanceResponse, Transfer, etc.
 ├── utils/
-│   ├── validators.js
-│   └── formatters.js
+│   ├── validators.ts
+│   └── formatters.ts
 └── styles/
     └── tokens.css
 ```
@@ -82,6 +86,7 @@ src/
 
 **Files:**
 - Modify: `package.json`
+- Create: `tsconfig.json`
 - Create: `src/styles/tokens.css`
 - Modify: `src/index.css`
 
@@ -91,13 +96,83 @@ src/
 cd C:/Users/santi/Desktop/DESARROLLOS/bancoxyz
 npm install react-router-dom zustand axios bcryptjs
 npm install better-sqlite3
+npm install --save-dev typescript @types/react @types/react-dom @types/node @types/bcryptjs
 ```
 
 Verifica con:
 ```bash
-npm list react-router-dom zustand axios bcryptjs better-sqlite3 --depth=0
+npm list react-router-dom zustand axios bcryptjs better-sqlite3 typescript --depth=0
 ```
-Esperado: las 5 dependencias listadas sin errores.
+Esperado: las 6 dependencias listadas sin errores.
+
+- [ ] **Step 1b: Crear `tsconfig.json`**
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}
+```
+
+- [ ] **Step 1c: Crear `src/types/index.ts`** con las interfaces compartidas
+
+```ts
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface BalanceResponse {
+  currency: string;
+  accountBalance: number;
+}
+
+export interface TransferBeneficiary {
+  nombre: string;
+  documento: string;
+}
+
+export interface Transfer {
+  valor: number;
+  fecha: string;
+  moneda: string;
+  beneficiario: TransferBeneficiary;
+}
+
+export interface TransferPayload {
+  valor: number;
+  moneda: string;
+  documento_pagador: string;
+  fecha_transferencia: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
+}
+
+export interface ValidationResult {
+  valid: boolean;
+  error: string | null;
+}
+```
 
 - [ ] **Step 2: Crear estructura de directorios**
 
@@ -828,16 +903,17 @@ export async function login(email, password) {
 }
 ```
 
-- [ ] **Step 2: Crear `src/api/balance.api.js`**
+- [ ] **Step 2: Crear `src/api/balance.api.ts`**
 
-```js
+```ts
 import axiosClient from './axiosClient';
+import type { BalanceResponse } from '../types';
 
-const BALANCE_URL = 'https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance';
+const BALANCE_URL = process.env.REACT_APP_BALANCE_URL!;
 
-export async function getBalance() {
-  const { data } = await axiosClient.get(BALANCE_URL);
-  return data; // { moneda, saldo }
+export async function getBalance(): Promise<BalanceResponse> {
+  const { data } = await axiosClient.get<BalanceResponse>(BALANCE_URL);
+  return data; // { currency: string, accountBalance: number }
 }
 ```
 
@@ -1401,7 +1477,7 @@ git commit -m "feat: implementar LoginPage con validaciones y manejo de error 40
 
 ---
 
-## Task 10: DashboardPage + BalanceCard
+## ~~Task 10: DashboardPage + BalanceCard~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/components/balance/BalanceCard.jsx`
@@ -1508,8 +1584,8 @@ export function useDashboardPage() {
 
   return {
     user,
-    saldo: data?.saldo ?? 0,
-    moneda: data?.moneda ?? 'COP',
+    saldo: data?.accountBalance ?? 0,   // API devuelve { currency, accountBalance }
+    moneda: data?.currency ?? 'USD',
     isLoading,
     isError,
     handleLogout,
@@ -1587,7 +1663,7 @@ git commit -m "feat: implementar DashboardPage con BalanceCard y saldo en tiempo
 
 ---
 
-## Task 11: TransferPage + TransferForm
+## ~~Task 11: TransferPage + TransferForm~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/components/transfer/TransferForm.jsx`
@@ -1866,7 +1942,7 @@ git commit -m "feat: implementar TransferPage con validaciones y transferencias 
 
 ---
 
-## Task 12: TransfersListPage + TransferList + FiltersBar
+## ~~Task 12: TransfersListPage + TransferList + FiltersBar~~ ✅ COMPLETADO
 
 **Files:**
 - Create: `src/components/transfers/TransferList.jsx`
