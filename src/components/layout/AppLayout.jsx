@@ -1,5 +1,5 @@
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Button, Divider } from '@mui/material';
-import { FiHome, FiRepeat, FiSettings, FiPlusCircle } from 'react-icons/fi';
+import { FiHome, FiRepeat, FiSettings } from 'react-icons/fi';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const SIDEBAR_WIDTH = 220;
