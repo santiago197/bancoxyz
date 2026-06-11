@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTransferMutation } from '../../../hooks/useTransferMutation';
 import { validateAmount, validateDate, validateDocument } from '../../../utils/validators';
@@ -21,6 +21,9 @@ export function useTransferPage() {
     documento_pagador: null,
     fecha_transferencia: null,
   });
+
+  const [successOpen, setSuccessOpen] = useState(false);
+  const handleSuccessClose = useCallback(() => setSuccessOpen(false), []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -51,7 +54,14 @@ export function useTransferPage() {
         documento_pagador: form.documento_pagador,
         fecha_transferencia: form.fecha_transferencia,
       },
-      { onSuccess: () => navigate('/transfers') }
+      {
+        onSuccess: (data) => {
+          if (data?.status === 'success') {
+            setSuccessOpen(true);
+            setTimeout(() => navigate('/transfers'), 2000);
+          }
+        },
+      }
     );
   }
 
@@ -67,5 +77,7 @@ export function useTransferPage() {
     isError,
     isScheduled,
     apiError,
+    successOpen,
+    handleSuccessClose,
   };
 }

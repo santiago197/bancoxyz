@@ -7,6 +7,8 @@ import {
   Paper,
   Box,
   Stack,
+  Snackbar,
+  Alert,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -19,8 +21,11 @@ import AppLayout from '../../components/layout/AppLayout';
 
 export default function TransferPage() {
   const navigate = useNavigate();
-  const { form, errors, handleChange, handleSubmit, isPending, isError, isScheduled, apiError } =
-    useTransferPage();
+  const {
+    form, errors, handleChange, handleSubmit,
+    isPending, isError, isScheduled, apiError,
+    successOpen, handleSuccessClose,
+  } = useTransferPage();
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -136,6 +141,17 @@ export default function TransferPage() {
           <BottomTabBar />
         </Box>
       </Box>
+
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={2000}
+        onClose={handleSuccessClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleSuccessClose} severity="success" variant="filled" sx={{ width: '100%' }}>
+          Transferencia realizada con éxito
+        </Alert>
+      </Snackbar>
     </AppLayout>
   );
 }

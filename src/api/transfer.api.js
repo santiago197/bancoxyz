@@ -4,10 +4,10 @@ const TRANSFER_URL = process.env.REACT_APP_TRANSFER_URL;
 
 export async function postTransfer({ valor, moneda, documento_pagador, fecha_transferencia }) {
   const { data } = await axiosClient.post(TRANSFER_URL, {
-    valor,
-    moneda,
-    documento_pagador,
-    fecha_transferencia,
+    value: valor,
+    currency: moneda,
+    payeerDocument: documento_pagador,
+    transferDate: fecha_transferencia,
   });
-  return data; // { estado: 'éxito' | 'error' }
+  return data; // { status: 'success' | 'error' }
 }
