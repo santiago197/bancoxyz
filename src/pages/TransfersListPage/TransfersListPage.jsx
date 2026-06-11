@@ -29,7 +29,7 @@ export default function TransfersListPage() {
 
         {/* Mobile AppBar */}
         <AppBar
-          position="static"
+          position="sticky"
           color="primary"
           elevation={0}
           sx={{ display: { xs: 'flex', md: 'none' } }}

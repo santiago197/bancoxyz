@@ -1,5 +1,5 @@
 import { Box, Typography, Chip, Button } from '@mui/material';
-import { FiTrendingUp } from 'react-icons/fi';
+// import { FiTrendingUp } from 'react-icons/fi';
 import Loader from '../ui/Loader';
 import { formatCurrency } from '../../utils/formatters';
 
