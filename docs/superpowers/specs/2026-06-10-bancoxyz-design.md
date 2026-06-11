@@ -428,17 +428,17 @@ CREATE TABLE transfers (
 
 ## 13. Checklist de implementación (orden estricto)
 
-1. [ ] Instalar dependencias: `react-router-dom`, `zustand`, `axios`, `better-sqlite3`, `bcryptjs`
-2. [ ] Crear estructura de directorios
-3. [ ] Implementar `axiosClient.js` (Singleton)
-4. [ ] Implementar `authStore` y `uiStore`
-5. [ ] Implementar `AppRouter` con `AuthGuard`
-6. [ ] Implementar componentes UI base: `Button`, `Input`, `Loader`, `ErrorMessage`
-7. [ ] Implementar `LoginPage` + `useLoginMutation`
-8. [ ] Implementar `DashboardPage` + `BalanceCard` + `useBalanceQuery`
-9. [ ] Implementar `TransferPage` + `TransferForm` + `useTransferMutation`
-10. [ ] Implementar `TransfersListPage` + `TransferList` + `FiltersBar` + `useTransfersQuery`
-11. [ ] Implementar SQLite (cache de transferencias)
-12. [ ] Implementar bcrypt (mock backend)
-13. [ ] Escribir tests unitarios
+1. [x] Instalar dependencias: `react-router-dom`, `zustand`, `axios`, `better-sqlite3`, `bcryptjs`
+2. [x] Crear estructura de directorios
+3. [x] Implementar `axiosClient.js` (Singleton + interceptores auth/401)
+4. [x] Implementar `authStore` y `uiStore`
+5. [x] Implementar `AppRouter` con `AuthGuard`
+6. [x] Implementar componentes UI base: `Button`, `Input`, `Loader`, `ErrorMessage`
+7. [x] Implementar `LoginPage` + `useLoginMutation`
+8. [x] Implementar `DashboardPage` + `BalanceCard` + `useBalanceQuery`
+9. [x] Implementar `TransferPage` + `TransferForm` + `useTransferMutation`
+10. [x] Implementar `TransfersListPage` + `TransferList` + `FiltersBar` + `useTransfersQuery`
+11. [x] Persistencia local de transferencias via `localStorage` (`localTransfers.js`) — reemplaza SQLite (no disponible en browser)
+12. [ ] Implementar bcrypt (mock backend) — fuera de scope browser, requiere servidor Node separado
+13. [x] Escribir tests unitarios (8 suites, 35 tests — todos passing)
 14. [ ] Validar responsividad en 375px, 768px, 1024px

@@ -6,9 +6,9 @@
 
 **Architecture:** CRA con estructura por feature (page + hook + components). Cada página tiene su propio hook de negocio, los componentes son presentacionales puros. La capa API es un Singleton de Axios con interceptores de auth.
 
-**Tech Stack:** React 19, **TypeScript**, React Router v6, Zustand, TanStack Query v5, Axios, Jest + RTL, better-sqlite3, bcryptjs
+**Tech Stack:** React 19, React Router v6, Zustand, TanStack Query v5, Axios, Jest + RTL, better-sqlite3, bcryptjs
 
-**Lenguaje:** **TypeScript obligatorio** en todos los archivos — extensiones `.ts` para módulos puros y `.tsx` para componentes React. Configurar `tsconfig.json` con `"strict": true`. Tipado explícito en props de componentes (`interface`), retornos de hooks, y respuestas de API.
+**Lenguaje:** JavaScript (JS/JSX). TypeScript no es requerido por el enunciado del test — la migración se descartó para evitar riesgo innecesario sobre código ya funcional con 35 tests en verde.
 
 **UI Framework:** Material UI (MUI) v5 — **OBLIGATORIO usar componentes MUI en toda la UI:**
 - Inputs → `TextField` de `@mui/material` (el componente `Input` wrappea TextField)
@@ -27,55 +27,57 @@
 ```
 src/
 ├── api/
-│   ├── axiosClient.ts
-│   ├── auth.api.ts
-│   ├── balance.api.ts        # retorna BalanceResponse { currency, accountBalance }
-│   ├── transfer.api.ts
-│   └── transferList.api.ts
+│   ├── axiosClient.js
+│   ├── auth.api.js
+│   ├── balance.api.js        # retorna { currency, accountBalance }
+│   ├── transfer.api.js
+│   └── transferList.api.js
 ├── components/
 │   ├── ui/
-│   │   ├── Button.tsx
-│   │   ├── Input.tsx
-│   │   ├── Loader.tsx
-│   │   └── ErrorMessage.tsx
+│   │   ├── Button.jsx
+│   │   ├── Input/
+│   │   ├── Loader.jsx
+│   │   ├── ErrorMessage.jsx
+│   │   └── BottomTabBar/
 │   ├── auth/
-│   │   └── AuthGuard.tsx
+│   │   └── AuthGuard.jsx
 │   ├── balance/
-│   │   └── BalanceCard.tsx
+│   │   └── BalanceCard.jsx
 │   ├── transfer/
-│   │   └── TransferForm.tsx
-│   └── transfers/
-│       ├── TransferList.tsx
-│       └── FiltersBar.tsx
+│   │   └── TransferForm.jsx
+│   ├── transfers/
+│   │   ├── TransferList.jsx
+│   │   └── FiltersBar.jsx
+│   └── layout/
+│       └── AppLayout.jsx
 ├── hooks/
-│   ├── useLoginMutation.ts
-│   ├── useBalanceQuery.ts
-│   ├── useTransferMutation.ts
-│   └── useTransfersQuery.ts
+│   ├── useLoginMutation.js
+│   ├── useBalanceQuery.js
+│   ├── useTransferMutation.js
+│   └── useTransfersQuery.js
 ├── pages/
 │   ├── LoginPage/
-│   │   ├── LoginPage.tsx
-│   │   ├── hooks/useLoginPage.ts
-│   │   └── components/LoginForm.tsx
+│   │   ├── LoginPage.jsx
+│   │   ├── hooks/useLoginPage.js
+│   │   └── components/LoginForm.jsx
 │   ├── DashboardPage/
-│   │   ├── DashboardPage.tsx
-│   │   └── hooks/useDashboardPage.ts
+│   │   ├── DashboardPage.jsx
+│   │   └── hooks/useDashboardPage.js
 │   ├── TransferPage/
-│   │   ├── TransferPage.tsx
-│   │   └── hooks/useTransferPage.ts
+│   │   ├── TransferPage.jsx
+│   │   └── hooks/useTransferPage.js
 │   └── TransfersListPage/
-│       ├── TransfersListPage.tsx
-│       └── hooks/useTransfersListPage.ts
+│       ├── TransfersListPage.jsx
+│       └── hooks/useTransfersListPage.js
 ├── routes/
-│   └── AppRouter.tsx
+│   └── AppRouter.jsx
 ├── store/
-│   ├── authStore.ts
-│   └── uiStore.ts
-├── types/
-│   └── index.ts              # interfaces compartidas: User, BalanceResponse, Transfer, etc.
+│   ├── authStore.js
+│   └── uiStore.js
 ├── utils/
-│   ├── validators.ts
-│   └── formatters.ts
+│   ├── validators.js
+│   ├── formatters.js
+│   └── localTransfers.js     # persistencia localStorage de transferencias
 └── styles/
     └── tokens.css
 ```
