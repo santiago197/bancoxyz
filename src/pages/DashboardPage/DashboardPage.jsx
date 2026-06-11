@@ -200,6 +200,20 @@ export default function DashboardPage() {
                 <FiUser size={18} />
               </Avatar>
             </Box>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={handleLogout}
+              startIcon={<FiLogOut size={15} />}
+              sx={{
+                borderColor: 'divider',
+                color: 'text.secondary',
+                fontWeight: 600,
+                '&:hover': { borderColor: 'error.main', color: 'error.main', bgcolor: 'transparent' },
+              }}
+            >
+              Salir
+            </Button>
           </Box>
         </Box>
 
